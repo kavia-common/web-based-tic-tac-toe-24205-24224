@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tic Tac Toe - Ocean Professional</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <h1 class="brand-title">Tic Tac Toe</h1>
+      </div>
+      <div class="scoreboard" role="group" aria-label="Scoreboard">
+        <div class="score score-x" aria-live="polite" aria-atomic="true">
+          <span class="label">X</span>
+          <span class="value" id="scoreX">0</span>
+        </div>
+        <div class="score score-ties" aria-live="polite" aria-atomic="true">
+          <span class="label">Ties</span>
+          <span class="value" id="scoreTies">0</span>
+        </div>
+        <div class="score score-o" aria-live="polite" aria-atomic="true">
+          <span class="label">O</span>
+          <span class="value" id="scoreO">0</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="board-wrap">
+      <div class="board" role="grid" aria-label="Tic Tac Toe Board">
+        <button class="cell" data-index="0" role="gridcell" aria-label="Cell 1"></button>
+        <button class="cell" data-index="1" role="gridcell" aria-label="Cell 2"></button>
+        <button class="cell" data-index="2" role="gridcell" aria-label="Cell 3"></button>
+        <button class="cell" data-index="3" role="gridcell" aria-label="Cell 4"></button>
+        <button class="cell" data-index="4" role="gridcell" aria-label="Cell 5"></button>
+        <button class="cell" data-index="5" role="gridcell" aria-label="Cell 6"></button>
+        <button class="cell" data-index="6" role="gridcell" aria-label="Cell 7"></button>
+        <button class="cell" data-index="7" role="gridcell" aria-label="Cell 8"></button>
+        <button class="cell" data-index="8" role="gridcell" aria-label="Cell 9"></button>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="status" id="status" aria-live="polite">X's turn</div>
+      <div class="actions">
+        <button class="btn ghost" id="btnUndo" type="button">Undo</button>
+        <button class="btn outline" id="btnNewGame" type="button">New Game</button>
+        <button class="btn solid" id="btnReset" type="button">Reset Scores</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="./script.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

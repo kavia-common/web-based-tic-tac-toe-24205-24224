@@ -1,0 +1,291 @@
+:root {
+  /* Ocean Professional theme tokens (styleThemeData) */
+  --color-primary: #2563EB;    /* Blue */
+  --color-secondary: #F59E0B;  /* Amber */
+  --color-error: #EF4444;
+  --color-text: #111827;
+  --color-surface: #ffffff;
+  --color-background: #f9fafb;
+
+  /* Derived */
+  --color-text-muted: rgba(17,24,39,0.7);
+  --color-outline: rgba(37, 99, 235, 0.35);
+  --color-shadow: rgba(0, 14, 51, 0.12);
+
+  /* Gradients and effects (from design system shadows/tones) */
+  --bg-gradient: linear-gradient(180deg, rgba(37,99,235,0.08), rgba(249,250,251,1));
+
+  /* Radii (from design system) */
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-24: 24px;
+
+  /* Typography */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial;
+  --font-weight-regular: 500;
+  --font-weight-bold: 700;
+
+  /* Sizes/spacing */
+  --container-max: 960px;
+  --gap-4: 4px;
+  --gap-6: 6px;
+  --gap-8: 8px;
+  --gap-12: 12px;
+  --gap-16: 16px;
+  --gap-20: 20px;
+  --gap-24: 24px;
+  --gap-32: 32px;
+  --gap-40: 40px;
+
+  /* Board sizing */
+  --cell-size: 120px;
+  --cell-gap: 12px;
+  --board-pad: 16px;
+
+  /* Transition */
+  --trans-fast: 140ms ease;
+  --trans-base: 220ms ease;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--bg-gradient);
+}
+
+/* App Shell */
+.app-shell {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: start;
+}
+
+.app-header {
+  max-width: var(--container-max);
+  margin: 32px auto 0;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap-16);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-12);
+}
+
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-12);
+  background: linear-gradient(135deg, rgba(37,99,235,0.18) 0%, rgba(245,158,11,0.18) 100%);
+  box-shadow: 0 4px 12px var(--color-shadow);
+}
+
+.brand-title {
+  margin: 0;
+  font-weight: var(--font-weight-bold);
+  font-size: 24px;
+  line-height: 1;
+}
+
+/* Scoreboard */
+.scoreboard {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(80px, 1fr));
+  gap: var(--gap-12);
+}
+
+.score {
+  background: var(--color-surface);
+  border-radius: var(--radius-12);
+  padding: 10px 12px;
+  box-shadow: 0 6px 16px var(--color-shadow);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--gap-8);
+  transition: transform var(--trans-base), box-shadow var(--trans-base);
+}
+
+.score:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px var(--color-shadow);
+}
+
+.score .label {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-muted);
+  letter-spacing: 0.3px;
+}
+
+.score .value {
+  font-weight: var(--font-weight-bold);
+  font-size: 20px;
+}
+
+.score-x .label { color: var(--color-primary); }
+.score-o .label { color: var(--color-secondary); }
+
+/* Board */
+.board-wrap {
+  display: grid;
+  place-items: center;
+  margin: 24px 0;
+  padding: 0 16px;
+}
+
+.board {
+  background: var(--color-surface);
+  border-radius: var(--radius-16);
+  padding: var(--board-pad);
+  box-shadow: 0 12px 36px var(--color-shadow);
+  display: grid;
+  grid-template-columns: repeat(3, var(--cell-size));
+  grid-auto-rows: var(--cell-size);
+  gap: var(--cell-gap);
+  position: relative;
+}
+
+.cell {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  outline: 0;
+  border-radius: var(--radius-8);
+  background: linear-gradient(180deg, #fff 0%, #f5f7fb 100%);
+  box-shadow: inset 0 0 0 1px rgba(37,99,235,0.10), 0 4px 10px var(--color-shadow);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 56px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  transition: transform var(--trans-fast), box-shadow var(--trans-fast), background var(--trans-fast);
+}
+
+.cell:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 0 0 1px rgba(37,99,235,0.18), 0 10px 24px var(--color-shadow);
+}
+
+.cell:focus-visible {
+  outline: 3px solid var(--color-outline);
+  outline-offset: 2px;
+}
+
+.cell.is-o {
+  color: var(--color-secondary);
+}
+
+.cell.won {
+  background: linear-gradient(180deg, rgba(37,99,235,0.10), rgba(245,158,11,0.10));
+  box-shadow: inset 0 0 0 2px rgba(37,99,235,0.30), 0 14px 28px var(--color-shadow);
+}
+
+/* Controls */
+.controls {
+  max-width: var(--container-max);
+  margin: 0 auto 48px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--gap-16);
+}
+
+.status {
+  color: var(--color-text);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.2px;
+}
+
+.actions {
+  display: flex;
+  gap: var(--gap-12);
+}
+
+.btn {
+  border: 0;
+  border-radius: var(--radius-8);
+  padding: 10px 16px;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: transform var(--trans-fast), box-shadow var(--trans-fast), background var(--trans-fast), color var(--trans-fast);
+  box-shadow: 0 4px 10px var(--color-shadow);
+}
+
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn.solid {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn.solid:hover {
+  box-shadow: 0 10px 24px var(--color-shadow);
+}
+
+.btn.outline {
+  background: #fff;
+  color: var(--color-primary);
+  box-shadow: inset 0 0 0 2px var(--color-primary), 0 4px 10px var(--color-shadow);
+}
+
+.btn.outline:hover {
+  background: rgba(37,99,235,0.06);
+}
+
+.btn.ghost {
+  background: rgba(37,99,235,0.06);
+  color: var(--color-primary);
+}
+
+.btn.ghost:hover {
+  background: rgba(37,99,235,0.12);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  :root {
+    --cell-size: 108px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .scoreboard {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  :root {
+    --cell-size: 96px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --cell-size: 84px;
+  }
+  .actions {
+    flex-wrap: wrap;
+  }
+}
